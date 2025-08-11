@@ -1,0 +1,96 @@
+#assignment-1
+
+#python
+
+#8. Rotate an array left and right by k positions
+arr = [1, 2, 3, 4, 5]
+k = 2
+left_rotated = arr[k:] + arr[:k]
+right_rotated = arr[-k:] + arr[:-k]
+print("Left rotated:", left_rotated)
+print("Right rotated:", right_rotated)
+
+#9. Write a program to merge two sorted array of length M & N. (M & N may not be equal)
+arr1 = [1, 3, 5, 7]
+arr2 = [2, 4, 6]
+merged = sorted(arr1 + arr2)
+print("Merged array:", merged)
+
+#10. Write a program to count frequency of each element in the array
+arr = [1, 2, 2, 3, 1, 4, 2, 3]
+freq = {}
+for x in arr:
+    freq[x] = freq.get(x, 0) + 1
+print("Element frequencies:", freq)
+
+
+
+
+//c
+//8. Rotate an array left and right by k positions
+#include <stdio.h>
+
+void rotateLeft(int arr[], int n, int k) {
+    printf("Left rotated: ");
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[(i + k) % n]);
+    printf("\n");
+}
+
+void rotateRight(int arr[], int n, int k) {
+    printf("Right rotated: ");
+    for (int i = 0; i < n; i++)
+        printf("%d ", arr[(i - k + n) % n]);
+    printf("\n");
+}
+
+//9. Write a program to merge two sorted array of length M & N. (M & N may not be equal)
+void mergeSorted(int a[], int m, int b[], int n) {
+    int result[100], i = 0, j = 0, k = 0;
+    while (i < m && j < n) {
+        if (a[i] < b[j]) result[k++] = a[i++];
+        else result[k++] = b[j++];
+    }
+    while (i < m) result[k++] = a[i++];
+    while (j < n) result[k++] = b[j++];
+    printf("Merged array: ");
+    for (int i = 0; i < k; i++) printf("%d ", result[i]);
+    printf("\n");
+}
+
+//10. Write a program to count frequency of each element in the array
+void frequencyCount(int arr[], int n) {
+    int counted[100] = {0};
+    printf("Element frequencies:\n");
+    for (int i = 0; i < n; i++) {
+        if (counted[i]) continue;
+        int count = 1;
+        for (int j = i + 1; j < n; j++) {
+            if (arr[i] == arr[j]) {
+                count++;
+                counted[j] = 1;
+            }
+        }
+        printf("%d -> %d\n", arr[i], count);
+    }
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = 5;
+    int k = 2;
+
+    rotateLeft(arr, n, k);
+    rotateRight(arr, n, k);
+
+    int a[] = {1, 3, 5, 7}, b[] = {2, 4, 6};
+    int m = 4, p = 3;
+    mergeSorted(a, m, b, p);
+
+    int freqArr[] = {1, 2, 2, 3, 1, 4, 2, 3};
+    int fLen = 8;
+    frequencyCount(freqArr, fLen);
+
+    return 0;
+}
+

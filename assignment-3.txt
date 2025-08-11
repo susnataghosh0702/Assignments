@@ -1,0 +1,76 @@
+# assignment-3 (Python)
+
+# 9. Abbreviation of a given phrase (first letter of each word)
+def abbreviation(phrase):
+    words = phrase.strip().split()
+    abbr = ''.join(word[0].upper() for word in words)
+    print("Abbreviation:", abbr)
+
+phrase_input = input("Enter a phrase: ")
+abbreviation(phrase_input)
+
+# 10. Count positives, negatives, evens, and odds from 25 numbers
+pos = neg = even = odd = 0
+print("Enter 25 numbers:")
+for _ in range(25):
+    num = int(input())
+    if num >= 0:
+        pos += 1
+    else:
+        neg += 1
+    if num % 2 == 0:
+        even += 1
+    else:
+        odd += 1
+
+print(f"Positive: {pos}, Negative: {neg}, Even: {even}, Odd: {odd}")
+
+
+// assignment-3 (C)
+
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+// 9. Abbreviation of a given phrase (first letter of each word)
+void printAbbreviation(char str[]) {
+    printf("Abbreviation: ");
+    if (str[0] != ' ')
+        printf("%c", toupper(str[0]));
+
+    for (int i = 1; str[i] != '\0'; i++) {
+        if (str[i - 1] == ' ' && str[i] != ' ')
+            printf("%c", toupper(str[i]));
+    }
+    printf("\n");
+}
+
+// 10. Count positives, negatives, evens, and odds from 25 numbers
+void analyzeNumbers() {
+    int num, pos = 0, neg = 0, even = 0, odd = 0;
+    printf("Enter 25 numbers:\n");
+    for (int i = 0; i < 25; i++) {
+        scanf("%d", &num);
+        if (num >= 0)
+            pos++;
+        else
+            neg++;
+        if (num % 2 == 0)
+            even++;
+        else
+            odd++;
+    }
+    printf("Positive: %d, Negative: %d, Even: %d, Odd: %d\n", pos, neg, even, odd);
+}
+
+int main() {
+    char str[100];
+    printf("Enter a phrase: ");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = '\0'; // remove newline if present
+
+    printAbbreviation(str);
+    analyzeNumbers();
+
+    return 0;
+}
